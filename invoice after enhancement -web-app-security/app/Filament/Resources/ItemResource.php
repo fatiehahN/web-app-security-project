@@ -37,11 +37,13 @@ class ItemResource extends Resource
                             ->maxLength(255),
 
                         Forms\Components\RichEditor::make('info')
-                            ->columnSpan('full'),
+                            ->columnSpan('full')
+                            ->dehydrateStateUsing(fn ($state) => strip_tags($state)),
 
                         Forms\Components\Textarea::make('short_description')
                             ->rows(2)
-                            ->columnSpan('full'),
+                            ->columnSpan('full')
+                            ->dehydrateStateUsing(fn ($state) => strip_tags($state)),
 
                         Forms\Components\Select::make('categories')
                             ->multiple()
