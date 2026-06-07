@@ -159,6 +159,83 @@ The original code checked credential authenticity strings immediately, allowing 
 
 ----
 #### c. Authorization
+##### 1. Technical Framework Overview
+The Invoice Management System implements Role-Based Access Control (RBAC) to ensure that users can only perform actions according to their assigned responsibilities.
+
+Three user roles are available within the system:
+• Superadmin – Full access to all system modules and records.
+• Admin – Allowed to manage customers, invoices, recurring invoices, and payments.
+• Customer – Limited to viewing information only and prohibited from modifying system records and cannot access the Customers page.
+
+The authorization mechanism was implemented in the resource files responsible for managing Customers, Invoices, Recurring Invoices, and Payments.
+
+##### 2. Authorization Architecture
+##### Before Enhancement:
+All authenticated users could access and perform actions on system resources without proper role restrictions. This created a risk where unauthorized users could modify or delete business records.
+
+[ 5 images before
+##### After Enhancement:
+Role verification is performed before allowing access to system functions. The application checks the user's role before displaying pages or permitting operations such as creating, editing, or deleting records. Only authorized users are granted access to sensitive management functions.
+
+[ 5 images after
+
+##### 3. Vulnerability: Improper Authorization Control
+* **Vulnerability Name:** Broken Access Control (CWE-862)
+* **Risk Rating:** High
+  
+###### A. Description & Testing Proof
+Initially, the application lacked sufficient authorization controls on several resources. Any authenticated user could potentially access management functions intended only for administrators.
+
+For example, a Customer account could potentially access invoice management pages and modify invoice information if no authorization checks were applied.
+
+This violates the principle of least privilege and increases the risk of unauthorized modification of business records.
+
+###### B. Security Risk Impact
+Insufficient authorization controls may allow attackers or unauthorized users to:
+
+• Modify invoice information
+• Create fraudulent payments
+• Delete customer records
+• Access sensitive business data
+• Disrupt normal business operations
+
+Such actions could compromise data integrity, financial records, and system reliability.
+
+###### C. Where the Code Was Updated
+* **File Directory Path:** `app/Filament/Resources/CustomerResource.php
+app/Filament/Resources/InvoiceResource.php
+app/Filament/Resources/RecurringInvoiceResource.php
+app/Filament/Resources/PaymentResource.php
+`
+* **Target Schema Section:** Authorization methods added within each Resource class.
+
+###### D. Source Code Modifications
+**I. InvoiceResource.php** 
+
+Before Code (Vulnerable)
+After Code (Mitigated and Hardened)
+
+
+**II. RecurringInvoiceResource.php** 
+
+Before Code (Vulnerable)
+After Code (Mitigated and Hardened)
+
+**III. PaymentResource.php** 
+Before Code (Vulnerable)
+After Code (Mitigated and Hardened)
+
+**IV. CustomerResource.php** 
+
+Before Code (Vulnerable)
+After Code (Mitigated and Hardened)
+
+###### E. Summary & Mitigation Result
+In summary, the original application lacked sufficient authorization controls, increasing the possibility of unauthorized access to administrative functions.
+
+The enhancement introduces role-based access control by verifying user roles before allowing access to system operations. Customers are limited to viewing information, while administrative actions such as creating, editing, and deleting records are restricted to Admin and Superadmin accounts only.
+
+This implementation follows the Principle of Least Privilege and significantly reduces the risk of unauthorized data manipulation within the system.
 
 
 ----
