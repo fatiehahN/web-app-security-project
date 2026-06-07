@@ -70,13 +70,13 @@ The original form definition trusted client-side inputs implicitly. It checked t
 The mitigation implements a robust server-side boundary range defense mechanism. By chaining the minValue(1) validator method onto the input structure, the system establishes a definitive backend boundary that automatically drops form validation payloads violating logical business rules before they hit database memory structures:
 <img width="743" height="208" alt="IV_flaw1_04" src="https://github.com/user-attachments/assets/16743c02-a497-4295-a609-348a64c9f79b" />
 
-##### 7. Report Summary & Explanation
+##### 7. Summary & Explanation
 In short, the original web app had no safety boundaries, letting users type a negative quantity (like `-38`) and create a negative bill of `-RM1,900.00` in the database. 
 
 By adding `minValue(1)`, we built a solid backend shield. Now, even if a hacker uses sneaky tools to bypass the browser screen, our server instantly catches the bad input, stops the math calculation, and forces the user to enter a real, positive number.
 <img width="1825" height="879" alt="IV_flaw1_02" src="https://github.com/user-attachments/assets/bfa855fc-f405-405a-98d2-58d12076f263" />
 
--------
+-----
 **Vulnerability 2 : Improper Neutralization of Input During Web Page Generation (CWE-79)**
 
 ##### 1. Flaw Overview: Bad Text Filtering / Code Injection (Stored XSS)
@@ -103,6 +103,17 @@ The security fix was implemented inside the invoice backend resource management 
 
 ###### Before Code (Vulnerable)
 The application accepted free-form string entries inside the text area directly, saving everything—including active scripts and raw HTML layouts—straight to your persistent database:
+<img width="281" height="63" alt="IV_flaw2_03_beforeCode" src="https://github.com/user-attachments/assets/70e3ae9a-be7e-4d98-9475-640a00925c18" />
+
+###### After Code (Mitigated & Hardened)
+We added a combination of maxLength(5000) and a custom data handling callback hook using dehydrateStateUsing(). When the user submits the form, the data is caught right before saving, and PHP's strip_tags() function scrubs out any dangerous programming scripts:
+<img width="531" height="159" alt="IV_flaw2_04_afterCode" src="https://github.com/user-attachments/assets/60d76fb0-96f5-47fa-a606-54eb56e4191e" />
+
+##### 7. Summary & Explanation
+In short, the original text box let anyone save dangerous programming code right into our database tables.
+To fix this, we added a maximum length rule to stop users from breaking the layout with massive blocks of text, and we used a tool called strip_tags(). Now, right before the note is saved to the database, our server instantly wipes away any hidden JavaScript or HTML scripts, keeping the data clean and safe for administrators to read.
+<img width="1406" height="759" alt="IV_flaw2_02" src="https://github.com/user-attachments/assets/309dc8e8-aca2-4aba-9b65-47cc4532f52a" />
+
 ----
 
 #### b. Authentication
@@ -110,9 +121,12 @@ Following authentication security best practices, the application gateway was ha
 1. **Brute-Force Protection via Rate Limiting:** A structural login rate limiter was introduced into the authentication attempt thread. If an automated script triggers consecutive failed authentication requests, a session-locked penalty wall (`locked_until`) activates. This halts the authentication flow early, preserving server resources and blocking automated dictionary lists before the resource-intensive password hashing check (`Hash::check`) runs.
 2. **Enforcement of High-Entropy Passwords (CWE-521):** The registration schema was upgraded to enforce a strict password complexity validation rule chain. The framework rejects weak or sequential strings, requiring all new accounts to contain a minimum of 8 characters consisting of an uppercase letter, a lowercase letter, a number, and a special keyboard symbol.
 
+----
 #### c. Authorization
 
-
+----
 #### d. XSS and CSRF Prevention
 
+
+----
 #### e. Database Security Principles
