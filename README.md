@@ -73,9 +73,11 @@ Leaving data ranges unvalidated exposes the application to parameter tampering. 
 The original layout only verified the integer data type but lacked lower range limits. The mitigation uses rule chaining to add an explicit `minValue(1)` parameter to enforce an absolute operational floor.
 
 **Before Code (Vulnerable):**
+
 <img width="543" height="151" alt="IV_flaw1_03" src="https://github.com/user-attachments/assets/169a599e-3959-4183-9b33-237970fd2391" />
 
 **After Code (Mitigated & Hardened):**
+
 <img width="743" height="208" alt="IV_flaw1_04" src="https://github.com/user-attachments/assets/16743c02-a497-4295-a609-348a64c9f79b" />
 
 ###### E. Summary & Mitigation Result
@@ -109,9 +111,11 @@ Because raw programming code strings live directly inside the database table, a 
 The vulnerability was mitigated by applying two protective layers: a size limit barrier (`maxLength`) to stop database text-flooding denial of service attempts, and an active server-side state sanitization callback hook using PHP's native `strip_tags()` function.
 
 **Before Code (Vulnerable):**
+
 <img width="281" height="63" alt="IV_flaw2_03_beforeCode" src="https://github.com/user-attachments/assets/70e3ae9a-be7e-4d98-9475-640a00925c18" />
 
 **After Code (Mitigated & Hardened):**
+
 <img width="531" height="159" alt="IV_flaw2_04_afterCode" src="https://github.com/user-attachments/assets/60d76fb0-96f5-47fa-a606-54eb56e4191e" />
 
 ###### E. Summary & Mitigation Result
@@ -119,7 +123,8 @@ In short, the original text box let anyone save dangerous programming code right
 
 To fix this, we added a maximum length rule to stop users from breaking the layout with massive blocks of text, and we used a tool called `strip_tags()`. Now, right before the note is saved to the database, our server instantly wipes away any hidden JavaScript or HTML scripts, keeping the data clean and safe for administrators to read.
 
-<img width="1406" height="759" alt="IV_flaw2_02" src="https://github.com/user-attachments/assets/309dc8e8-aca2-4aba-9b65-47cc4532f52a" />
+<img width="1406" height="759" alt="IV_flaw2_02" src="https://github.com/user-attachments/assets/309dc8e8-aca2-4aba-9b65-47cc4532f52a" /> 
+
 ----
 
 #### b. Authentication
