@@ -140,8 +140,8 @@ The authentication perimeter of the application serves as the primary barrier pr
 ###### A. Description & Testing Proof
 During authentication security testing, the login portal was subjected to an online credential-guessing simulation. A valid email address was targeted, and incorrect password payloads were submitted 20 consecutive times. The application backend originally failed to restrict or delay submittal traffic, continually rendering standard validation alerts without penalizing the source session.
 
-### 📸 Testing Proof: Before Enhancement (Vulnerable State)
-*(Drag and drop your browser screenshot showing multiple login attempts passing without a lockout rule)*
+<img width="1892" height="876" alt="Screenshot 2026-06-07 114255" src="https://github.com/user-attachments/assets/e33cca4d-84f0-4ade-8cd9-c03e8a504a32" />
+
 
 ###### B. Security Risk Impact
 Without an automated lockout policy, the authentication gateway is completely exposed to rapid, automated online brute-force and dictionary attacks. A threat actor can systematically exhaust thousands of password variations using basic credential-stuffing tools until a valid authentication string matches, leading to complete account takeover (ATO).
