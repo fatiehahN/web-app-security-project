@@ -251,9 +251,11 @@ The SQL Injection security review focused on invoice-related database operations
 
 ##### 2. Database Security Architecture
 
-* **Application Layer Validation:** User input is validated before being processed by the system, reducing the likelihood of malformed or malicious data reaching the database layer.
-* **Eloquent ORM Query Layer:** Database interactions are performed through Laravel Eloquent methods rather than manually written SQL statements.
-* **Parameterized Query Binding:** User-supplied values are automatically bound as query parameters, preventing them from being interpreted as executable SQL code.
+* **Laravel Eloquent ORM:** The system performs database operations using Laravel Eloquent ORM rather than manually written SQL statements.
+
+* **Automatic Query Parameterization:** Eloquent automatically converts query conditions into parameterized SQL queries, preventing user-supplied values from being interpreted as executable SQL commands.
+
+* **Database Security Review:** A security review was conducted to verify that invoice-related database operations continue to use Eloquent query methods instead of raw SQL statements.
 
 Together, these layers provide protection against SQL Injection attacks and help preserve database integrity.
 
