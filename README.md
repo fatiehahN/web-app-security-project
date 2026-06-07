@@ -12,7 +12,7 @@
 ---
 
 ### Title of the Web Application
-* **Application Title:** Automated Secure Invoice and Payment Management System
+* **Application Title:** Invoice Sensei
 
 ---
 
