@@ -128,9 +128,32 @@ To fix this, we added a maximum length rule to stop users from breaking the layo
 ----
 
 #### b. Authentication
-Following authentication security best practices, the application gateway was hardened using two defense mechanisms:
-1. **Brute-Force Protection via Rate Limiting:** A structural login rate limiter was introduced into the authentication attempt thread. If an automated script triggers consecutive failed authentication requests, a session-locked penalty wall (`locked_until`) activates. This halts the authentication flow early, preserving server resources and blocking automated dictionary lists before the resource-intensive password hashing check (`Hash::check`) runs.
-2. **Enforcement of High-Entropy Passwords (CWE-521):** The registration schema was upgraded to enforce a strict password complexity validation rule chain. The framework rejects weak or sequential strings, requiring all new accounts to contain a minimum of 8 characters consisting of an uppercase letter, a lowercase letter, a number, and a special keyboard symbol.
+##### 1. Technical Framework Overview
+The authentication perimeter of the application serves as the primary barrier protecting user identities and financial ledgers. To safeguard tenant parameters against unauthorized entry, defensive rate limiting and strict credential policies are applied to stop automated attack engines before they can interact with background resource strings.
+
+
+#### 2. Vulnerability 1: Missing Account Lockout Mechanism (CWE-307)
+* **Vulnerability Name:** Online Brute-Force & Credential Guessing Exposure
+* **Technical Identifier:** CWE-307 (Improper Restriction of Excessive Authentication Attempts) / OWASP A07:2021-Identification and Authentication Failures
+* **Risk Rating:** High
+
+###### A. Description & Testing Proof
+During authentication security testing, the login portal was subjected to an online credential-guessing simulation. A valid email address was targeted, and incorrect password payloads were submitted 20 consecutive times. The application backend originally failed to restrict or delay submittal traffic, continually rendering standard validation alerts without penalizing the source session.
+
+### 📸 Testing Proof: Before Enhancement (Vulnerable State)
+*(Drag and drop your browser screenshot showing multiple login attempts passing without a lockout rule)*
+
+###### B. Security Risk Impact
+Without an automated lockout policy, the authentication gateway is completely exposed to rapid, automated online brute-force and dictionary attacks. A threat actor can systematically exhaust thousands of password variations using basic credential-stuffing tools until a valid authentication string matches, leading to complete account takeover (ATO).
+
+###### C. Where the Code Was Updated
+* **File Directory Path:** `app/Filament/Pages/Auth/Login.php`
+* **Target Schema Section:** Inside the primary controller login execution class, specifically modifying the header intercept layout of the `authenticate()` execution method.
+
+###### D. Source Code Modifications
+The original code checked credential authenticity strings immediately, allowing threat actors to repeat invalid connection loops instantly. The mitigation puts a security wall at the very top of the function to kill the process instantly if a session lock threshold is currently active.
+
+**Before Code (Vulnerable):**
 
 ----
 #### c. Authorization
