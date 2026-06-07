@@ -42,6 +42,7 @@ The core objectives of the security engineering modifications implemented in thi
 * What it means in simple English: The web app forgets to check if a user is entering a valid, positive number. It blindly trusts whatever number the user types into the Quantity or Price boxes.
 * How you proved it: You typed -38 into the headphones quantity box. Instead of blocking you, the web app multiplied it by the price and calculated a final invoice total of -RM1,900.00, then successfully saved it into the database.
 * Why it’s a security risk: A malicious user could use this to manipulate their invoice. By creating a "negative bill," they could trick an accounting system into giving them free money, issuing fake refunds, or wiping away a real debt they owe a business.
+*<img width="1662" height="844" alt="IV_flaw1_01" src="https://github.com/user-attachments/assets/5473287f-e1b2-40f1-b7a5-ff9818edb4d7" />
 
 #### ii. Authentication
 Following authentication security best practices, the application gateway was hardened using two defense mechanisms:
