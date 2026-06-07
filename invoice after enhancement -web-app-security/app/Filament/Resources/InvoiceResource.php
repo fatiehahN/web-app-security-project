@@ -27,6 +27,41 @@ class InvoiceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?int $navigationSort = 6;
 
+ // Authorization Enhancement
+
+public static function canViewAny(): bool
+{
+    return auth()->user()?->hasRole([
+        'superadmin',
+        'admin',
+        'customer'
+    ]);
+}
+
+public static function canCreate(): bool
+{
+    return auth()->user()?->hasRole([
+        'superadmin',
+        'admin'
+    ]);
+}
+
+public static function canEdit($record): bool
+{
+    return auth()->user()?->hasRole([
+        'superadmin',
+        'admin'
+    ]);
+}
+
+public static function canDelete($record): bool
+{
+    return auth()->user()?->hasRole([
+        'superadmin',
+        'admin'
+    ]);
+}
+    
     public static function form(Form $form): Form
     {
         return $form
