@@ -50,8 +50,20 @@ During testing, a negative value of `-38` was typed into the headphones quantity
   
 <img width="1662" height="844" alt="IV_flaw1_01" src="https://github.com/user-attachments/assets/5473287f-e1b2-40f1-b7a5-ff9818edb4d7" />
 
-* **Before Code : **
-  The input field only forced the data type to be an integer but had no lower boundary rules. This allowed negative numbers to pass directly through the math calculations.
+##### 4. Why It Is a Security Risk
+Leaving data ranges unvalidated allows malicious users to perform parameter tampering. By creating a "negative bill," an attacker could trick an automated corporate accounting ledger system into giving them free money, issuing unauthorized automatic refunds, or wiping away a real, valid debt they owe a business.
+
+##### 5. Where the Code Was Updated
+The security fix was implemented inside the backend configuration file managing invoice resource layouts:
+* **File Directory Path:** `app/Filament/Resources/InvoiceResource.php`
+* **Target Schema Section:** Inside the Form Schema array, specifically inside the `TextInput` component definition handling the line-item quantity metadata (`pivot.quantity`).
+
+##### 6. Source Code Modifications
+
+###### Before Code (Vulnerable)
+The original form definition trusted client-side inputs implicitly. It checked that the data type was an integer, but completely ignored the value range boundaries, letting negative integers pass directly into the mathematical calculation sequences:
+
+
 
 
 
