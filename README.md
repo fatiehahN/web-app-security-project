@@ -64,10 +64,12 @@ The security fix was implemented inside the backend configuration file managing 
 
 ###### Before Code (Vulnerable)
 The original form definition trusted client-side inputs implicitly. It checked that the data type was an integer, but completely ignored the value range boundaries, letting negative integers pass directly into the mathematical calculation sequences:
+
 <img width="543" height="151" alt="IV_flaw1_03" src="https://github.com/user-attachments/assets/169a599e-3959-4183-9b33-237970fd2391" />
 
 ###### After Code (Mitigated & Hardened)
 The mitigation implements a robust server-side boundary range defense mechanism. By chaining the minValue(1) validator method onto the input structure, the system establishes a definitive backend boundary that automatically drops form validation payloads violating logical business rules before they hit database memory structures:
+
 <img width="743" height="208" alt="IV_flaw1_04" src="https://github.com/user-attachments/assets/16743c02-a497-4295-a609-348a64c9f79b" />
 
 ##### 7. Summary & Explanation
@@ -103,10 +105,12 @@ The security fix was implemented inside the invoice backend resource management 
 
 ###### Before Code (Vulnerable)
 The application accepted free-form string entries inside the text area directly, saving everything—including active scripts and raw HTML layouts—straight to your persistent database:
+
 <img width="281" height="63" alt="IV_flaw2_03_beforeCode" src="https://github.com/user-attachments/assets/70e3ae9a-be7e-4d98-9475-640a00925c18" />
 
 ###### After Code (Mitigated & Hardened)
 We added a combination of maxLength(5000) and a custom data handling callback hook using dehydrateStateUsing(). When the user submits the form, the data is caught right before saving, and PHP's strip_tags() function scrubs out any dangerous programming scripts:
+
 <img width="531" height="159" alt="IV_flaw2_04_afterCode" src="https://github.com/user-attachments/assets/60d76fb0-96f5-47fa-a606-54eb56e4191e" />
 
 ##### 7. Summary & Explanation
