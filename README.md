@@ -37,9 +37,11 @@ The core objectives of the security engineering modifications implemented in thi
 ### Web Application Security Enhancements
 
 #### a. Input Validation
-* **Vulnerability 1 :  Improper Input Validation** User Registration Parameters (`name`, `email`, `password`, `password_confirmation`), Invoice Record Modals, and Payment Transaction Fields (`amount`, `transaction_reference`).
-* **Client-Side Validation:** Handled dynamically via Filament’s real-time input masks and browser-level reactive constraints. Text inputs explicitly restrict maximum string limits (`maxLength(255)`), enforce specific HTML5 input types (e.g., `type="email"`), and utilize structural field locking (`required()`) to catch empty form payloads before transmission.
-* **Server-Side Validation:** Enforced rigorously using Laravel’s backend validation layer during lifecycle hooks. Even if an attacker uses browser inspection tools to bypass client constraints, the server catches bad inputs. For example, transaction inputs are bound to numeric filters (`numeric()`) and minimum mathematical boundaries (`rule('min:0.01')`) to completely block parameter tampering, negative values, or zero-value exploitation.
+**Vulnerability 1 :  Improper Input Validation**
+*The Technical Name: Improper Input Validation (CWE-20)
+*What it means in simple English: The web app forgets to check if a user is entering a valid, positive number. It blindly trusts whatever number the user types into the Quantity or Price boxes.
+*How you proved it: You typed -38 into the headphones quantity box. Instead of blocking you, the web app multiplied it by the price and calculated a final invoice total of -RM1,900.00, then successfully saved it into the database.
+*Why it’s a security risk: A malicious user could use this to manipulate their invoice. By creating a "negative bill," they could trick an accounting system into giving them free money, issuing fake refunds, or wiping away a real debt they owe a business.
 
 #### ii. Authentication
 Following authentication security best practices, the application gateway was hardened using two defense mechanisms:
