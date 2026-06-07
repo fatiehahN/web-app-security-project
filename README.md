@@ -36,6 +36,8 @@ The core objectives of the security engineering modifications implemented in thi
 
 ### Web Application Security Enhancements
 
+----
+
 #### a. Input Validation
 **Vulnerability 1 :  Improper Input Validation (CWE-20)**
 * **Vulnerability Name:** Range & Numeric Boundary Check Failure
@@ -62,19 +64,28 @@ The security fix was implemented inside the backend configuration file managing 
 
 ###### Before Code (Vulnerable)
 The original form definition trusted client-side inputs implicitly. It checked that the data type was an integer, but completely ignored the value range boundaries, letting negative integers pass directly into the mathematical calculation sequences:
+<img width="543" height="151" alt="IV_flaw1_03" src="https://github.com/user-attachments/assets/169a599e-3959-4183-9b33-237970fd2391" />
 
+###### After Code (Mitigated & Hardened)
+The mitigation implements a robust server-side boundary range defense mechanism. By chaining the minValue(1) validator method onto the input structure, the system establishes a definitive backend boundary that automatically drops form validation payloads violating logical business rules before they hit database memory structures:
+<img width="743" height="208" alt="IV_flaw1_04" src="https://github.com/user-attachments/assets/16743c02-a497-4295-a609-348a64c9f79b" />
 
+##### 7. Report Summary & Explanation
+In short, the original web app had no safety boundaries, letting users type a negative quantity (like `-38`) and create a negative bill of `-RM1,900.00` in the database. 
 
+By adding `minValue(1)`, we built a solid backend shield. Now, even if a hacker uses sneaky tools to bypass the browser screen, our server instantly catches the bad input, stops the math calculation, and forces the user to enter a real, positive number.
+<img width="1825" height="879" alt="IV_flaw1_02" src="https://github.com/user-attachments/assets/bfa855fc-f405-405a-98d2-58d12076f263" />
 
+----
 
-#### ii. Authentication
+#### b. Authentication
 Following authentication security best practices, the application gateway was hardened using two defense mechanisms:
 1. **Brute-Force Protection via Rate Limiting:** A structural login rate limiter was introduced into the authentication attempt thread. If an automated script triggers consecutive failed authentication requests, a session-locked penalty wall (`locked_until`) activates. This halts the authentication flow early, preserving server resources and blocking automated dictionary lists before the resource-intensive password hashing check (`Hash::check`) runs.
 2. **Enforcement of High-Entropy Passwords (CWE-521):** The registration schema was upgraded to enforce a strict password complexity validation rule chain. The framework rejects weak or sequential strings, requiring all new accounts to contain a minimum of 8 characters consisting of an uppercase letter, a lowercase letter, a number, and a special keyboard symbol.
 
-#### iii. Authorization
+#### c. Authorization
 
 
-#### iv. XSS and CSRF Prevention
+#### d. XSS and CSRF Prevention
 
-#### v. Database Security Principles
+#### e. Database Security Principles
