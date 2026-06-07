@@ -164,8 +164,10 @@ class UserResource extends Resource
                         ]))
                         ->requiresConfirmation(),
                     Tables\Actions\DeleteAction::make()
+                        ->requiresConfirmation()
                         ->hidden(fn($record) => auth()->user()->id == $record->id),
                     Tables\Actions\ForceDeleteAction::make()
+                        ->requiresConfirmation()
                         ->hidden(fn($record) => auth()->user()->id == $record->id),
                     Tables\Actions\RestoreAction::make()
                         ->hidden(fn($record) => auth()->user()->id == $record->id),
