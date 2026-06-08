@@ -130,9 +130,9 @@ To fix this, we added a maximum length rule to stop users from breaking the layo
 ----
 
 #### b. Authentication
+
 ##### 1. Technical Framework Overview
 The authentication perimeter of the application serves as the primary barrier protecting user identities and financial ledgers. To safeguard tenant parameters against unauthorized entry, defensive rate limiting and strict credential policies are applied to stop automated attack engines before they can interact with background resource strings.
-
 
 #### 2. Vulnerability 1: Missing Account Lockout Mechanism (CWE-307)
 * **Vulnerability Name:** Online Brute-Force & Credential Guessing Exposure
