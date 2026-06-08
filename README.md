@@ -465,9 +465,9 @@ The security framework focuses on:
 - Additional confirmation controls for sensitive actions involving record deletion.
 
 ##### 2. Vulnerability 1: Stored Cross-Site Scripting (CWE-79)
-- * **Vulnerability Name:** Improper Input Sanitization in Invoice Notes Field
-- * **Technical Identifier:** CWE-79 (Improper Neutralization of Input During Web Page Generation)
-- * **Risk Rating:** Medium / High
+- **Vulnerability Name:** Improper Input Sanitization in Invoice Notes Field
+- **Technical Identifier:** CWE-79 (Improper Neutralization of Input During Web Page Generation)
+- **Risk Rating:** Medium / High
   
 ###### A. Description & Testing Proof
 
@@ -487,8 +487,8 @@ Stored XSS creates a persistent attack vector because malicious code remains sto
 - Manipulate invoice content displayed to users.
   
 ###### C. Where the Code Was Updated
-- * **File Directory Path:** `app/Filament/Resources/InvoiceResource.php`
-- * **Target Schema Section:** Invoice Notes Field `(Textarea::make('notes'))`
+- **File Directory Path:** `app/Filament/Resources/InvoiceResource.php`
+- **Target Schema Section:** Invoice Notes Field `(Textarea::make('notes'))`
 
 ###### D. Source Code Modifications
 
@@ -503,9 +503,9 @@ After Code (Mitigated & Hardened):
 The implemented solution removes all HTML and JavaScript tags before data is stored in the database. The `strip_tags()` function ensures that malicious scripts cannot persist within invoice records, significantly reducing the risk of Stored Cross-Site Scripting attacks.
 
 ##### 3. Vulnerability 2: Cross-Site Request Forgery (CSRF)
-- * **Vulnerability Name:** Unauthorized Request Execution Through Forged Requests
-- * **Technical Identifier:** CWE-352 (Cross-Site Request Forgery)
-- * **Risk Rating:** Medium
+- **Vulnerability Name:** Unauthorized Request Execution Through Forged Requests
+- **Technical Identifier:** CWE-352 (Cross-Site Request Forgery)
+- **Risk Rating:** Medium
 
 ###### A. Description & Testing Proof
 
@@ -554,9 +554,9 @@ The security framework focuses on:
 - Protecting sensitive application files from public exposure.
 
 ##### 2. Vulnerability 1: Unrestricted File Upload
-- * **Vulnerability Name:** Improper Restriction of Uploaded File Types
-- * **Technical Identifier:** CWE-434 (Unrestricted Upload of File with Dangerous Type)
-- * **Risk Rating:** High
+- **Vulnerability Name:** Improper Restriction of Uploaded File Types
+- **Technical Identifier:** CWE-434 (Unrestricted Upload of File with Dangerous Type)
+- **Risk Rating:** High
 
 ###### A. Description & Testing Proof
 
@@ -572,8 +572,8 @@ If unrestricted file uploads are permitted, attackers may:
 - Consume excessive server storage resources.
 
 ###### C. Where the Code Was Updated
-- * **File Directory Path:** `app/Filament/Resources/ItemResource.php`
-- * **Target Schema Section:** Product Image Upload Component
+- **File Directory Path:** `app/Filament/Resources/ItemResource.php`
+- **Target Schema Section:** Product Image Upload Component
 
 ###### D. Source Code Modifications
 
