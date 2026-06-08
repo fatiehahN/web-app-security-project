@@ -44,6 +44,8 @@ class Invoice extends Model
     {
 
         return Invoice::where('team_id', $tenant_id)->orderBy('id', 'desc')->first()?->id + 1;
+       //This uses Laravel Eloquent ORM, which automatically uses parameterized queries
+
     }
 
 
