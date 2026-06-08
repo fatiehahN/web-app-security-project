@@ -250,8 +250,9 @@ Such actions could compromise data integrity, financial records, and system reli
 
 * After Code (Mitigated and Hardened)
 
-<img width="716" height="422" alt="Screenshot 2026-06-08 145146" src="https://github.com/user-attachments/assets/13c33fa6-6265-4d40-82f5-da99293dd657" />
 <img width="717" height="502" alt="Screenshot 2026-06-08 145108" src="https://github.com/user-attachments/assets/7e502a09-9ff8-4aaf-bc7d-b2bb0e0ba399" />
+<img width="680" height="626" alt="Screenshot 2026-06-08 150030" src="https://github.com/user-attachments/assets/923f4373-7b83-4980-a053-1640169e92ed" />
+
 
 
 **III. PaymentResource.php** 
@@ -343,7 +344,8 @@ Such attacks may compromise the confidentiality, integrity, and availability of 
 ###### C. Where the Code Was Reviewed
 
 * **File Directory Path:** `app/Models/Invoice.php`
-* **Target Function:** `static function generate_invoice_number($tenant_id)
+* **Target Function:**
+  `static function generate_invoice_number($tenant_id)
 {
     return Invoice::where('team_id', $tenant_id)
         ->orderBy('id', 'desc')
@@ -357,14 +359,8 @@ The reviewed function retrieves invoice information using Eloquent ORM methods r
 
 **Current Secure Implementation**
 
-```php
-static function generate_invoice_number($tenant_id)
-{
-    return Invoice::where('team_id', $tenant_id)
-        ->orderBy('id', 'desc')
-        ->first()?->id + 1;
-}
-````
+<img width="936" height="145" alt="Screenshot 2026-06-08 150359" src="https://github.com/user-attachments/assets/99d01c67-cb0f-4f17-aed4-8493a82ce665" />
+
 
 The query uses:
 
@@ -480,7 +476,7 @@ Example:
 Laravel automatically validates every incoming request against a valid CSRF token. Requests that fail validation are immediately rejected. Combined with confirmation prompts, this significantly reduces the likelihood of unauthorized or accidental destructive actions.
 
 ----
-#### f. Database Security Principles
+#### f. File Security Principles
 ##### 1. Technical Framework Overview
 
 The application implements file upload security controls to ensure that uploaded files cannot be abused as a mechanism for malware distribution, server compromise, or unauthorized file execution.
