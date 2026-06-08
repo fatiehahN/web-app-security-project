@@ -129,7 +129,7 @@ To fix this, we added a maximum length rule to stop users from breaking the layo
 
 ----
 
-#### b. Authentication
+### **b. Authentication**
 
 ##### 1. Technical Framework Overview
 The authentication perimeter of the application serves as the primary barrier protecting user identities and financial ledgers. To safeguard tenant parameters against unauthorized entry, defensive rate limiting and strict credential policies are applied to stop automated attack engines before they can interact with background resource strings.
@@ -222,7 +222,7 @@ By rewrote the validation rules to require true character diversity, we built a 
 
 
 ----
-#### c. Authorization
+### **c. Authorization**
 ##### 1. Technical Framework Overview
 The Invoice Management System implements Role-Based Access Control (RBAC) to ensure that users can only perform actions according to their assigned responsibilities.
 
@@ -351,7 +351,7 @@ This implementation follows the Principle of Least Privilege and significantly r
 
 
 ----
-#### d. Database Security Principles
+### **d. Database Security Principles**
 
 ##### 1. Technical Framework Overview
 
@@ -449,7 +449,7 @@ By relying on Eloquent ORM together with application-level input validation, the
 
 
 ----
-#### e. XSS and CSRF Prevention
+### **e. XSS and CSRF Prevention**
 ##### 1. Technical Framework Overview
 
 The application implements multiple layers of protection against client-side attacks that target user sessions and browser execution environments. These controls are designed to prevent malicious scripts from being stored within invoice records and to protect authenticated users from unauthorized request forgery attacks.
