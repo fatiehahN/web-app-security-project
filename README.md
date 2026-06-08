@@ -175,11 +175,28 @@ The authorization mechanism was implemented in the resource files responsible fo
 ##### Before Enhancement:
 All authenticated users could access and perform actions on system resources without proper role restrictions. This created a risk where unauthorized users could modify or delete business records.
 
-[ 5 images before
+<img width="1720" height="178" alt="Screenshot 2026-06-08 144123" src="https://github.com/user-attachments/assets/00c5278a-304a-45fe-a39b-ea29a4a9c8c6" />
+
+<img width="1717" height="473" alt="Screenshot 2026-06-08 144134" src="https://github.com/user-attachments/assets/6ee10e42-1097-4cdd-89c6-05d71f09526c" />
+
+<img width="1712" height="465" alt="Screenshot 2026-06-08 144142" src="https://github.com/user-attachments/assets/8d27803a-8d6f-4b72-b21f-95a26ef1fde8" />
+
+<img width="1713" height="552" alt="Screenshot 2026-06-08 144157" src="https://github.com/user-attachments/assets/79ed2c16-0780-4306-8ea2-176e2c54bbd2" />
+
+<img width="1707" height="477" alt="Screenshot 2026-06-08 144150" src="https://github.com/user-attachments/assets/cabb64d9-14d6-4c64-9e98-7d55169f3283" />
+
+
 ##### After Enhancement:
 Role verification is performed before allowing access to system functions. The application checks the user's role before displaying pages or permitting operations such as creating, editing, or deleting records. Only authorized users are granted access to sensitive management functions.
 
-[ 5 images after
+<img width="1205" height="143" alt="Screenshot 2026-06-08 144350" src="https://github.com/user-attachments/assets/bd985063-d412-4985-8f34-8e460d9e6aff" />
+
+<img width="1227" height="353" alt="Screenshot 2026-06-08 144357" src="https://github.com/user-attachments/assets/58568d00-7fa4-4c08-9411-ab2dbb418525" />
+
+<img width="1195" height="310" alt="Screenshot 2026-06-08 144403" src="https://github.com/user-attachments/assets/70a6a48d-82c1-45c0-a784-94e0cbd4a5bd" />
+
+<img width="1206" height="357" alt="Screenshot 2026-06-08 144409" src="https://github.com/user-attachments/assets/ad258547-07e1-4277-9d42-3dad8ba0f00a" />
+
 
 
 ##### 3. Vulnerability: Improper Authorization Control
@@ -216,24 +233,48 @@ Such actions could compromise data integrity, financial records, and system reli
 ###### D. Source Code Modifications
 **I. InvoiceResource.php** 
 
-*Before Code (Vulnerable)
+* Before Code (Vulnerable)
 
-*After Code (Mitigated and Hardened)
+<img width="715" height="163" alt="Screenshot 2026-06-08 144811" src="https://github.com/user-attachments/assets/b8d566d6-bc46-47af-abcf-1a129d06df6b" />
+
+* After Code (Mitigated and Hardened)
+<img width="713" height="487" alt="Screenshot 2026-06-08 144834" src="https://github.com/user-attachments/assets/00a88f32-4440-43a5-84f2-700f83bbe70d" />
+<img width="717" height="398" alt="Screenshot 2026-06-08 144931" src="https://github.com/user-attachments/assets/c66e42d2-3f7c-4ea7-9170-d5f46af7c836" />
 
 
 **II. RecurringInvoiceResource.php** 
 
-*Before Code (Vulnerable)
-*After Code (Mitigated and Hardened)
+* Before Code (Vulnerable)
+  
+<img width="717" height="102" alt="Screenshot 2026-06-08 145012" src="https://github.com/user-attachments/assets/f7838672-8264-4a1b-8338-507a427ccae0" />
+
+* After Code (Mitigated and Hardened)
+
+<img width="716" height="422" alt="Screenshot 2026-06-08 145146" src="https://github.com/user-attachments/assets/13c33fa6-6265-4d40-82f5-da99293dd657" />
+<img width="717" height="502" alt="Screenshot 2026-06-08 145108" src="https://github.com/user-attachments/assets/7e502a09-9ff8-4aaf-bc7d-b2bb0e0ba399" />
+
 
 **III. PaymentResource.php** 
-*Before Code (Vulnerable)
-*After Code (Mitigated and Hardened)
+* Before Code (Vulnerable)
+<img width="713" height="77" alt="Screenshot 2026-06-08 145233" src="https://github.com/user-attachments/assets/604aacd7-c0f7-4c0a-8f67-bd3b54c1cbae" />
+
+* After Code (Mitigated and Hardened)
+<img width="720" height="496" alt="Screenshot 2026-06-08 145307" src="https://github.com/user-attachments/assets/ed3e74a6-295d-4091-bafc-da077dce3922" />
+
+<img width="713" height="576" alt="Screenshot 2026-06-08 145324" src="https://github.com/user-attachments/assets/9345644f-06ac-490a-8760-758d279b454d" />
+
 
 **IV. CustomerResource.php** 
 
 *Before Code (Vulnerable)
+<img width="717" height="82" alt="Screenshot 2026-06-08 145357" src="https://github.com/user-attachments/assets/9c82ad48-81da-4441-82a2-caccc359e5a4" />
+
+
 *After Code (Mitigated and Hardened)
+
+<img width="715" height="538" alt="Screenshot 2026-06-08 145428" src="https://github.com/user-attachments/assets/c13cb011-1fae-4947-bea8-aed3755a53a3" />
+
+<img width="720" height="266" alt="Screenshot 2026-06-08 145448" src="https://github.com/user-attachments/assets/41f13337-afb8-4001-8f01-e16e16ee5053" />
 
 
 ###### E. Summary & Mitigation Result
