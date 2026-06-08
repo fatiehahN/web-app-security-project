@@ -368,18 +368,21 @@ The SQL Injection security review focused on invoice-related database operations
 
 ##### 2. Database Security Architecture
 
-**Before Security Review** 
-The application was already developed using Laravel Eloquent ORM through Filament Resource components and Eloquent Models. Database queries were executed through ORM methods rather than raw SQL statements.
+**Before Security Review**
 
-**After Security Review** 
-A security review was conducted to verify that database interactions continue to use Eloquent ORM and parameterized queries. Additional validation rules were also implemented at the application layer to ensure that only valid data reaches the database.
+The application was already developed using Laravel Eloquent ORM through Filament Resource components and Eloquent Models. Database queries were executed through ORM methods rather than manually constructed SQL statements.
 
-This approach provides multiple layers of protection:
-* Eloquent ORM Query Layer 
-* Database Query Binding Layer
+**After Security Review**
 
-Together, these controls help prevent SQL Injection attempts from reaching the database engine.
+A security review was conducted to verify that all reviewed invoice-related database operations continue to use Laravel Eloquent ORM and parameterized query mechanisms. The review confirmed that no raw SQL statements were used within the assessed functionality.
 
+This approach provides multiple layers of database security:
+
+* **Eloquent ORM Query Layer** – Database queries are generated using Eloquent methods such as `where()`, `orderBy()`, and `first()` instead of manually concatenated SQL strings.
+
+* **Database Query Binding Layer** – Laravel automatically converts Eloquent queries into parameterized statements and securely binds user-supplied values as parameters.
+
+Together, these controls help prevent SQL Injection attempts from modifying SQL query structures and reduce the risk of unauthorized database access.
 
 #### 3. Vulnerability: SQL Injection (CWE-89)
 
@@ -393,7 +396,11 @@ SQL Injection occurs when user-controlled input is inserted directly into SQL st
 If raw SQL statements are used improperly, attackers may attempt to manipulate database queries by injecting malicious SQL payloads into application inputs.
 
 During the security assessment, database-related functionality was reviewed to verify that queries were executed through Laravel Eloquent ORM rather than dynamically concatenated SQL strings.
-The review confirmed that invoice-related database operations utilize Eloquent methods, which automatically apply parameterized query bindings.
+The review confirmed that invoice-related database operations utilize Eloquent methods, which automatically apply parameterized query bindings. For testing purposes, a SQL Injection payload (`1=1`) was entered into the **Customer Name** field. The application accepted the input and stored it as ordinary customer data rather than interpreting it as a SQL command.
+
+<img width="1521" height="148" alt="Screenshot 2026-06-08 230210" src="https://github.com/user-attachments/assets/67a04e40-9507-4fff-b8bc-6d254408a691" />
+
+The successful storage of the payload as plain text demonstrates that the application treats user input as data rather than executable SQL statements, which is consistent with Laravel Eloquent ORM's parameterized query mechanism.
 
 
 ###### B. Security Risk Impact
@@ -436,7 +443,6 @@ The query uses:
 * `first()`
 
 These Eloquent methods automatically generate parameterized SQL queries and securely bind the `$tenant_id` value to the database query.
-
 As a result, user input cannot alter the structure of the SQL command.
 
 No source code modification was required because secure database access practices were already implemented through Laravel Eloquent ORM and Filament's database abstraction layer.
