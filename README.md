@@ -35,10 +35,10 @@ This project borrows ideas from open-source options like Invoice Ninja but limit
 The primary objective of the security engineering modifications implemented in this project is to transition Invoice Sensei from a baseline, functional utility into a hardened, production-ready web application. By proactively addressing architectural weaknesses, these enhancements aim to establish a secure environment for business operations through the following core goals:
 
 1. **To Protect User Identities and Session Integrity:** Fortify the application's entry barriers to secure authentication pathways, ensuring that user accounts and access credentials are resilient against automated exploitation and unauthorized entry attempts.
-2. **To Enforce the Principle of Least Privilege:** Implement robust structural access boundaries within the application, ensuring that users interact with data and administrative functions strictly in accordance with their designated operational roles[cite: 1].
-3. **To Guarantee Data and Input Integrity:** Establish comprehensive server-side defensive layers that validate, sanitize, and regulate all user-supplied data, preventing malicious payloads from corrupting the system's database or executing unauthorized browser scripts[cite: 1].
-4. **To Safeguard Server Assets and Storage Infrastructure:** Secure file handling processes and system directories against abuse, ensuring that file interactions are strictly managed to maintain application reliability and protect host resources[cite: 1].
-5. **To Align with Industry Security Standards:** Elevate Invoice Sensei's overall architecture closer to the compliance guidelines of established industry frameworks, such as the OWASP Top 10, thereby ensuring a reliable, trust-worthy invoicing facility for small businesses and individuals[cite: 1].
+2. **To Enforce the Principle of Least Privilege:** Implement robust structural access boundaries within the application, ensuring that users interact with data and administrative functions strictly in accordance with their designated operational roles.
+3. **To Guarantee Data and Input Integrity:** Establish comprehensive server-side defensive layers that validate, sanitize, and regulate all user-supplied data, preventing malicious payloads from corrupting the system's database or executing unauthorized browser scripts.
+4. **To Safeguard Server Assets and Storage Infrastructure:** Secure file handling processes and system directories against abuse, ensuring that file interactions are strictly managed to maintain application reliability and protect host resources.
+5. **To Align with Industry Security Standards:** Elevate Invoice Sensei's overall architecture closer to the compliance guidelines of established industry frameworks, such as the OWASP Top 10, thereby ensuring a reliable, trust-worthy invoicing facility for small businesses and individuals.
 ---
 
 ### Web Application Security Enhancements
