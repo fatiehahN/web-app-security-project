@@ -536,6 +536,8 @@ Sensitive delete operations were configured to require user confirmation before 
 Example:
 <img width="499" height="63" alt="image" src="https://github.com/user-attachments/assets/076cf428-0362-49fa-8b5e-4e413838b5b4" />
 <img width="759" height="174" alt="image" src="https://github.com/user-attachments/assets/175ed4c4-63bd-43ea-8a74-08d23c242ec7" />
+<img width="1280" height="535" alt="image" src="https://github.com/user-attachments/assets/a59b52d9-f66c-4213-90c2-862ce67bb7a3" />
+<img width="1280" height="493" alt="image" src="https://github.com/user-attachments/assets/a752089a-21ce-4bb8-ba7c-9ad4ec84a303" />
 
 ###### E. Summary & Mitigation Result
 
