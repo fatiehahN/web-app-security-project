@@ -211,6 +211,8 @@ In the original implementation, the system relied on generic validation settings
 **After Code (Mitigated & Hardened):**
 
 <img width="752" height="374" alt="Auth_flaw2_afterCode" src="https://github.com/user-attachments/assets/aab95a13-6112-4773-b9de-84579546ea68" />
+<img width="696" height="413" alt="Screenshot 2026-06-09 090627" src="https://github.com/user-attachments/assets/efdab24c-0521-4147-bb16-73d39f3f4627" />
+
 
 ###### E. Summary & Mitigation Result
 In simple terms, the original signup form let anyone create accounts using incredibly weak, sequential passwords like "12345678", leaving user accounts highly vulnerable to automated guessing scripts.
